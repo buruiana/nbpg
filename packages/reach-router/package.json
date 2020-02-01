@@ -1,0 +1,9 @@
+{
+  "name": "@bpgen/reach-router",
+  "version": "1.0.0",
+  "license": "MIT",
+  "source": true,
+  "dependencies": {
+    "@reach/router": "^1.2.1"
+  }
+}

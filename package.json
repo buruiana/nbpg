@@ -1,0 +1,19 @@
+{
+  "name": "bpgen",
+  "version": "1.0.0",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "client": "yarn workspace @bpgen/main start",
+    "server": "yarn workspace @bpgen/express start",
+    "build": "yarn workspace @bpgen/main build",
+    "start": "concurrently --kill-others \"yarn client\" \"yarn server\""
+  },
+  "dependencies": {
+    "concurrently": "^5.0.2"
+  }
+}

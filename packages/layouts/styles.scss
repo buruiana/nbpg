@@ -1,0 +1,115 @@
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 0.8rem;
+  font-family: 'PragmataPro' !important;
+}
+
+.rightButton {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.menuButton {
+  color: white !important;
+}
+
+.genericContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.nav {
+  margin-bottom: 1rem;
+}
+
+.padd_bott {
+  padding-bottom: 1rem !important;
+}
+
+.padd_top_bott {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.generic_link {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.icon_wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  height: 100%;
+}
+
+.columnTree {
+  flex: 60%;
+  padding: 1%;
+}
+
+.column50 {
+  flex: 45%;
+  //padding: 1%;
+  min-width: 300px;
+}
+
+.rst__moveHandle,
+.rst__loadingHandle {
+  background-color: #b5a33f;
+  border-radius: 10px 0px 0px 10px !important;
+  border: 1px solid #b5a33f;
+  color: white;
+}
+
+div.rst__rowContents {
+  border-radius: 0px 10px 10px 0px;
+  border-top: 1px solid #b5a33f;
+  border-bottom: 1px solid #b5a33f;
+  border-right: 1px solid #b5a33f;
+}
+
+div.rst__moveHandle {
+  background-color: #b5a33f;
+}
+
+.rstcustom__rowLabel {
+  cursor: pointer;
+}
+
+.search {
+  justify-content: flex-end;
+  display: flex;
+}
+
+.padded {
+  padding: 1rem;
+}
+
+.padd-left {
+  padding-left: 0.5rem;
+}
+
+.right {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.left {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  height: 100%;
+}

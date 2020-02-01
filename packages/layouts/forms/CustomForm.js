@@ -20,8 +20,25 @@ const CustomForm = () => {
 
   const modals = useSelector(modalSelectors.modalSelector) || []
   const customForms = useSelector(projectSelectors.customFormsSelector) || []
-  const currentModal = modals[modals.length-1]
-  const currentForm = customForms[currentModal.type]
+  const currentModal = modals[modals.length - 1]
+
+  const currentTemplate = useSelector(projectSelectors.currentTemplateSelector) || []
+
+  const getTemplateForm = () => {
+    let templateForm = {}
+    get(currentTemplate, 'templateFiles', []).map(e => {
+      e.fileForms.filter(form => {
+        if (form.formName === currentModal.type) {
+          templateForm = form
+        }
+      })
+    })
+    return templateForm
+  }
+
+  const currentForm = !isEmpty(customForms[currentModal.type])
+    ? customForms[currentModal.type]
+    : getTemplateForm()
 
   if (isEmpty(get(currentForm, 'formSchema', {}))) {
     dispatch(setError('Missing schema'))

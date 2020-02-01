@@ -5,7 +5,7 @@ import CustomNavBar from "@bpgen/layouts/components/CustomNavBar"
 import SortTree from '../components/SortTree'
 import SaveIcon from '@material-ui/icons/Save'
 import CodeIcon from '@material-ui/icons/Code'
-import ImportExportIcon from '@material-ui/icons/ImportExport';
+import ImportExportIcon from '@material-ui/icons/ImportExport'
 import SettingsIcon from '@material-ui/icons/Settings'
 import {
   projectSelectors,

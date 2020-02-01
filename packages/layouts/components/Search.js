@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Search = ({ searchFields }) => {
+const Search = ({ searchFields='' }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
 

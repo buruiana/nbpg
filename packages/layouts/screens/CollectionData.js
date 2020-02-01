@@ -115,7 +115,7 @@ const CollectionData = props => {
         </Grid>
         <Grid item xs={3}>
           <Typography variant="h5">
-            {selectedCollection.title.toUpperCase()} DATA
+            {get(selectedCollection, 'title', '').toUpperCase()} DATA
           </Typography>
         </Grid>
         {selectedCollection.title !== 'projects' &&

@@ -3,7 +3,7 @@ import { setError, setInfo } from '@bpgen/services'
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 const exportFiles = data => {
-  return axios.post('http://localhost:5000/api/exportFiles', data);
+  return axios.post('http://localhost:5000/api/exportFiles', data)
 };
 
 export function* watchExportFiles(action) {

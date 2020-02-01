@@ -3,7 +3,7 @@ const http = require("http");
 
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
+const shell = require("shelljs");
 const prettier = require("prettier");
 const fs = require("fs");
 const cors = require("cors");
@@ -102,6 +102,23 @@ app.post("/api/prettify", (req, res) => {
   });
 
   res.json(newCode);
+});
+
+app.post("/api/exportFiles", (req, res) => {
+  const { id, code, dest } = req.body;
+
+  shell.mkdir(dest);
+  if (id !== 'all') {
+    const finalDest = req.body.dest + `/${id}`;
+    fs.writeFileSync(`${finalDest}`, code, "utf8");
+  } else {
+    req.body.code.map(e => {
+      const finalDest = req.body.dest + `/${e.id}`;
+      fs.writeFileSync(`${finalDest}`, e.code, "utf8");
+    });
+  }
+
+  res.json("done");
 });
 
 const port = process.env.PORT || 5000;

@@ -5,12 +5,16 @@ import CustomNavBar from "@bpgen/layouts/components/CustomNavBar"
 import SortTree from '../components/SortTree'
 import SaveIcon from '@material-ui/icons/Save'
 import CodeIcon from '@material-ui/icons/Code'
+import ImportExportIcon from '@material-ui/icons/ImportExport';
 import SettingsIcon from '@material-ui/icons/Settings'
 import {
   projectSelectors,
   collectionSelectors,
+  codeGenSelectors,
   updateItem,
   getCollections,
+  setInfo,
+  exportFiles,
 } from '@bpgen/services'
 import isEmpty from 'lodash/isEmpty'
 import get from 'lodash/get'
@@ -35,6 +39,7 @@ const Editor = () => {
   const projectSettings = useSelector(projectSelectors.projectSettingsSelector) || []
   const currentProject = useSelector(projectSelectors.currentProjectSelector) || []
   const collections = useSelector(collectionSelectors.collectionSelector) || []
+  const code = useSelector(codeGenSelectors.codeGenSelector) || []
   const projectsCollection = get(collections.filter(e => e.title === 'projects'), [0], {})
   const projectsData = get(projectsCollection, 'data', [])
 
@@ -71,6 +76,16 @@ const Editor = () => {
 
     dispatch(updateItem({ type: 'collections', data: newProjectCollection }))
     dispatch(getCollections())
+    dispatch(setInfo('Collection saved'))
+  }
+
+  const exportProjectFiles = () => {
+    const data = {
+      id: 'all',
+      code,
+      dest: projectSettings.destination
+    }
+    dispatch(exportFiles({ data }))
   }
 
   return (
@@ -79,7 +94,7 @@ const Editor = () => {
       <Grid container spacing={3}>
         <Grid item md={10}>
           <div className='left'>
-            <Search />
+            <Search searchFields={['keyword', 'technos', 'providers']}/>
           </div>
         </Grid>
         <Grid item md={2}>
@@ -92,6 +107,12 @@ const Editor = () => {
             />
             <CodeIcon
               onClick={onClick}
+              color='primary'
+              fontSize="large"
+              className='generic_link'
+            />
+            <ImportExportIcon
+              onClick={exportProjectFiles}
               color='primary'
               fontSize="large"
               className='generic_link'

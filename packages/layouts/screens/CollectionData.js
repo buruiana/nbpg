@@ -13,7 +13,7 @@ import { DeleteRounded } from '@material-ui/icons'
 
 import StorageIcon from '@material-ui/icons/Storage'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
-
+import Search from '@bpgen/layouts/components/Search'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
@@ -27,10 +27,11 @@ import {
   generateCode,
   setCurrentTab,
   setAceTabs,
+  searchSelectors,
 } from '@bpgen/services'
-import capitalize from 'lodash/capitalize'
-import get from 'lodash/get'
 
+import get from 'lodash/get'
+import sortBy from 'lodash/sortBy'
 import '../styles.scss'
 
 const CollectionData = props => {
@@ -39,9 +40,39 @@ const CollectionData = props => {
 
   const collections = useSelector(collectionSelectors.collectionSelector) || []
   const selectedCollection = get(collections.filter(e => e._id === id), '[0]', [])
-
+  const searchData = useSelector(searchSelectors.searchSelector) || {}
   const data = get(selectedCollection, 'data', [])
   const getId = row => row.id || row.title
+
+  const filteredData = () => {
+    const filtered = data.filter(el => {
+      if (get(searchData, 'keyword', '')) {
+        return (el.title.toLowerCase().indexOf(searchData.keyword.toLowerCase()) !== -1) &&
+          (
+            get(searchData, 'provider', el.provider) === el.provider ||
+            get(searchData, 'provider', 'all') === 'all'
+          )
+          &&
+          (
+            get(searchData, 'techno', el.techno) === el.techno ||
+            get(searchData, 'techno', 'all') === 'all'
+          )
+      }
+      return (
+        (
+          get(searchData, 'provider', el.provider) === el.provider ||
+          get(searchData, 'provider', 'all') === 'all'
+        )
+        &&
+        (
+          get(searchData, 'techno', el.techno) === el.techno ||
+          get(searchData, 'techno', 'all') === 'all'
+        )
+      )
+    })
+
+    return sortBy(filtered, el => el.title)
+  }
 
   const addNew = () => navigate(`/editdata/${id}/new`)
   const deleteCollectionData = item => {
@@ -74,7 +105,7 @@ const CollectionData = props => {
   return (
     <div className='test'>
       <Grid container spacing={3}>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Button
             onClick={() => navigate(`/list`)}
             color='secondary'
@@ -82,9 +113,9 @@ const CollectionData = props => {
             Back
           </Button>
         </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6">
-            {capitalize(selectedCollection.title)} Data
+        <Grid item xs={3}>
+          <Typography variant="h5">
+            {selectedCollection.title.toUpperCase()} DATA
           </Typography>
         </Grid>
         {selectedCollection.title !== 'projects' &&
@@ -97,6 +128,9 @@ const CollectionData = props => {
             />
           </Grid>
         }
+        <div className='right'>
+          <Search searchFields={selectedCollection.searchFields}/>
+        </div>
         <TableContainer component={Paper}>
           <Table className='table' aria-label="simple table">
             <TableHead>
@@ -106,7 +140,7 @@ const CollectionData = props => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map(row => (
+              {filteredData().map(row => (
                 <TableRow key={row.title}>
                   <TableCell>{row.title}</TableCell>
                   <TableCell align="right">

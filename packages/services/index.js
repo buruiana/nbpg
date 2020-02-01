@@ -43,6 +43,7 @@ export {
   setError,
   setInfo,
   resetAlert,
+  exportFiles,
   projectHelper,
   projectSelectors,
   projectServiceReducer,

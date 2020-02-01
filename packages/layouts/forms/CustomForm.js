@@ -11,9 +11,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Theme as MuiTheme } from 'rjsf-material-ui'
 import Button from '@material-ui/core/Button'
 import isEmpty from 'lodash/isEmpty'
+import get from 'lodash/get'
 import Container from '@material-ui/core/Container'
 
-const CustomForm = props => {
+const CustomForm = () => {
   const dispatch = useDispatch()
   const Form = withTheme(MuiTheme)
 
@@ -22,7 +23,7 @@ const CustomForm = props => {
   const currentModal = modals[modals.length-1]
   const currentForm = customForms[currentModal.type]
 
-  if (isEmpty(currentForm.formSchema)) {
+  if (isEmpty(get(currentForm, 'formSchema', {}))) {
     dispatch(setError('Missing schema'))
     return null
   }

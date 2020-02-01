@@ -14,7 +14,7 @@ import AceTabs from './AceTabs'
 
 const Ace = ( ) => {
 
-  const code = useSelector(codeGenSelectors.codeGenSelector) || ''
+  const code = useSelector(codeGenSelectors.codeGenSelector) || []
   const currentTab = useSelector(projectSelectors.currentTabSelector) || ''
 
   // const onChange = newValue => {

@@ -1,21 +1,21 @@
 import axios from 'axios'
-import { setError, setCollections } from '@bpgen/services'
+import { setError, setInfo } from '@bpgen/services'
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-const callBackend = (type, data) => {
-  return axios.post(`http://localhost:5000/api/${type}`, { data })
-}
+const exportFiles = data => {
+  return axios.post('http://localhost:5000/api/exportFiles', data);
+};
 
-export function* watchGetCollections() {
+export function* watchExportFiles(action) {
   try {
-    const res = yield callBackend('read', {type: 'collections'})
-
-    yield put(setCollections(res.data))
+    yield call(exportFiles, action.payload.data)
+    yield put(setInfo('Files have been successfully exported.'))
   } catch (error) {
     yield put(setError(error.message))
   }
+
 }
 
 export default function* rootSaga() {
-  yield takeLatest('collection/getCollections', watchGetCollections)
+  yield takeLatest('project/exportFiles', watchExportFiles)
 }

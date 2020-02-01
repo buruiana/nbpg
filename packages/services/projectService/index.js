@@ -51,6 +51,7 @@ const projectService = createSlice({
       state.info = ''
       state.error = ''
     },
+    exportFiles: (state, action) => {}
   }
 })
 
@@ -67,6 +68,7 @@ export const {
   setError,
   setInfo,
   resetAlert,
+  exportFiles,
 } = actions
 export { reducer as projectServiceReducer }
 export { selectors as projectSelectors }

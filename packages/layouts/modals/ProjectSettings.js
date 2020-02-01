@@ -21,7 +21,11 @@ const ProjectSettings = props => {
   const collections = useSelector(collectionSelectors.collectionSelector) || []
 
   const templates = get(collections.filter(e => e.title === 'templates'), '[0].data', [])
-  const getTemplatesTypeEnums = () => templates.map(e => e.title)
+  const technos = get(collections.filter(e => e.title === 'technos'), '[0].data', [])
+  const getTemplatesTypesEnum = () => templates.map(e => e.id)
+  const getTechnosEnum = () => technos.map(e => e.id)
+  const getTemplatesTypesEnumNames = () => templates.map(e => e.title)
+  const getTechnosEnumNames = () => technos.map(e => e.title)
 
   const Form = withTheme(MuiTheme)
 
@@ -39,10 +43,17 @@ const ProjectSettings = props => {
         title: 'Destination',
         default: get(currentProject.destination, '')
       },
+      techno: {
+        type: "string",
+        title: 'Techno',
+        enum: getTechnosEnum(),
+        enumNames: getTechnosEnumNames(),
+      },
       template: {
         type: "string",
         title: 'Template',
-        enum: getTemplatesTypeEnums(),
+        enum: getTemplatesTypesEnum(),
+        enumNames: getTemplatesTypesEnumNames(),
       }
     }
   }
@@ -50,7 +61,10 @@ const ProjectSettings = props => {
   const uiSchema = {
     template: {
       "ui:placeholder": "Choose a template"
-     },
+    },
+    techno: {
+      "ui:placeholder": "Choose a template"
+    },
   }
 
   const onSubmit = ({ formData }) => {

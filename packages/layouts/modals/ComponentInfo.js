@@ -73,25 +73,25 @@ const ProjectSettings = props => {
           {title}
         </Typography>
         <TextField
-          id="outlined-secondary"
+          id="provider"
           label="Provider"
           variant="outlined"
           color="secondary"
           defaultValue={provider} />
         <TextField
-          id="outlined-secondary"
+          id="techno"
           label="Techno"
           variant="outlined"
           color="secondary"
           defaultValue={techno} />
         <TextField
-          id="outlined-secondary"
+          id="propType"
           label="PropType"
           variant="outlined"
           color="secondary"
           defaultValue={propType} />
         <TextField
-          id="outlined-multiline-static"
+          id="description"
           label="Description"
           multiline
           rows="25"
@@ -100,9 +100,7 @@ const ProjectSettings = props => {
           fullWidth />
 
         <div className='padded'>
-          <Typography variant="h4" className={classes.title}>
-            Props
-          </Typography>
+          <Typography variant="h4" className={classes.title}>Props</Typography>
           {getComponentProps()}
         </div>
       </div>

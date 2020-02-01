@@ -7,7 +7,11 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { collectionSelectors, setSearch } from '@bpgen/services'
+import {
+  collectionSelectors,
+  searchSelectors,
+  setSearch,
+} from '@bpgen/services'
 
 import get from 'lodash/get'
 
@@ -27,10 +31,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Search = () => {
+const Search = ({ searchFields }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
-  const [searchData, setSearchData] = useState({ keyword: '', techno: '', provider: '' })
+
+  const searchData = useSelector(searchSelectors.searchSelector) || {}
   const collections = useSelector(collectionSelectors.collectionSelector) || []
 
   const technos = collections.filter(e => e.title === 'technos')
@@ -40,78 +45,86 @@ const Search = () => {
   const [labelWidth, setLabelWidth] = React.useState(0)
 
   useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth)
+    setLabelWidth(get(inputLabel, 'current.offsetWidth', 0))
   }, [])
 
   const handleChange = event => {
     dispatch(setSearch({ ...searchData, [event.target.name]: event.target.value }))
-    setSearchData({ ...searchData, [event.target.name]: event.target.value })
   }
 
   const getTechnos = () => {
     return get(technos, '[0].data', []).map(e => {
       return (
-        <MenuItem value={e.title} key={e.title}>{e.title}</MenuItem>
+        <MenuItem value={e.id} key={e.title}>{e.title}</MenuItem>
         )
     })
   }
   const getProviders = () => {
     return get(providers, '[0].data', []).map(e => {
       return (
-        <MenuItem value={e.title} key={e.title}>{e.title}</MenuItem>
+        <MenuItem value={e.id} key={e.title}>{e.title}</MenuItem>
       )
     })
   }
 
   return (
     <>
-      <FormControl variant="filled" className={classes.formControl}>
-        <TextField
-          name="keyword"
-          label="Search"
-          variant="outlined"
-          onChange={handleChange}
-        />
-      </FormControl>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel
-          ref={inputLabel}
-          id="techno_label"
-        >
-          Technos
+      {
+        searchFields.includes('keyword') &&
+        <FormControl variant="filled" className={classes.formControl}>
+          <TextField
+            name="keyword"
+            label="Search"
+            variant="outlined"
+            onChange={handleChange}
+          />
+        </FormControl>
+      }
+      {
+        searchFields.includes('technos') &&
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel
+            ref={inputLabel}
+            id="techno_label"
+          >
+            Technos
         </InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          name="techno"
-          value={searchData.techno}
-          onChange={handleChange}
-          labelWidth={labelWidth}
-        >
-          <MenuItem value="all">
-            <em>All</em>
-          </MenuItem>
-          {getTechnos()}
-        </Select>
-      </FormControl>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel
-          ref={inputLabel}
-          id="provider_label">
-          Providers
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          name="provider"
-          value={searchData.provider}
-          onChange={handleChange}
-          labelWidth={labelWidth}
-        >
-          <MenuItem value="all">
-            <em>All</em>
-          </MenuItem>
-          {getProviders()}
-        </Select>
-      </FormControl>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            name="techno"
+            value={searchData.techno || 'all'}
+            onChange={handleChange}
+            labelWidth={labelWidth}
+          >
+            <MenuItem value="all">
+              <em>All</em>
+            </MenuItem>
+            {getTechnos()}
+          </Select>
+        </FormControl>
+      }
+      {
+        searchFields.includes('providers') &&
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel
+            ref={inputLabel}
+            id="provider_label">
+            Providers
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            name="provider"
+            value={searchData.provider || 'all'}
+            onChange={handleChange}
+            labelWidth={labelWidth}
+          >
+            <MenuItem value="all">
+              <em>All</em>
+            </MenuItem>
+            {getProviders()}
+          </Select>
+        </FormControl>
+      }
     </>
   )
 }

@@ -10,7 +10,8 @@
     "fs": "^0.0.1-security",
     "http": "^0.0.0",
     "mongoose": "^5.8.3",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "shelljs": "^0.8.3"
   },
   "scripts": {
     "start": "nodemon ./"

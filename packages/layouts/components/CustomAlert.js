@@ -10,6 +10,8 @@ const CustomAlert = () => {
 
   const onClose = () => dispatch(resetAlert())
 
+  setTimeout(() => onClose(), 5000)
+
   if (!error && !info) return null
   const severity = error ? 'error' : 'success'
 

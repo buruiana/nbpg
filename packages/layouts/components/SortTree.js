@@ -41,13 +41,29 @@ const SortTree = () => {
 
   const filteredDefaultTree = () => {
     const filteredComponents = components.filter(el => {
-      if (!isEmpty(searchData.keyword)) {
-        return (el.title.toLowerCase().indexOf(searchData.keyword.toLowerCase()) !== -1)
-          // && get(searchData, 'provider', el.provider) === el.provider
-          // && get(searchData, 'techno', el.techno) === el.techno
+      if (get(searchData, 'keyword', '')) {
+        return (el.title.toLowerCase().indexOf(searchData.keyword.toLowerCase()) !== -1) &&
+          (
+            get(searchData, 'provider', el.provider) === el.provider ||
+            get(searchData, 'provider', 'all') === 'all'
+          )
+          &&
+          (
+            get(searchData, 'techno', el.techno) === el.techno ||
+            get(searchData, 'techno', 'all') === 'all'
+          )
       }
-      return (get(searchData, 'provider', el.provider) === el.provider
-        && get(searchData, 'techno', el.techno) === el.techno)
+      return (
+        (
+          get(searchData, 'provider', el.provider) === el.provider ||
+          get(searchData, 'provider', 'all') === 'all'
+        )
+        &&
+        (
+          get(searchData, 'techno', el.techno) === el.techno ||
+          get(searchData, 'techno', 'all') === 'all'
+        )
+      )
     })
 
     return sortBy(filteredComponents, el => el.title)

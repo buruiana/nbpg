@@ -1,6 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCollections, collectionSelectors, deleteItem } from '@bpgen/services'
+import {
+  getCollections,
+  collectionSelectors,
+  deleteItem,
+  searchSelectors,
+} from '@bpgen/services'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -10,9 +15,9 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from '@material-ui/core/Link'
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-
+import get from 'lodash/get'
+import sortBy from 'lodash/sortBy'
 import { DeleteRounded } from '@material-ui/icons'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import StorageIcon from '@material-ui/icons/Storage'
@@ -28,7 +33,19 @@ const CollectionList = props => {
   const dispatch = useDispatch()
 
   const collections = useSelector(collectionSelectors.collectionSelector) || []
+  const searchData = useSelector(searchSelectors.searchSelector) || {}
   const classes = useStyles()
+
+  const filteredCollections = () => {
+    const filtered = collections.filter(el => {
+      if (get(searchData, 'keyword', '')) {
+        return (el.title.toLowerCase().indexOf(searchData.keyword.toLowerCase()) !== -1)
+      }
+      return []
+    })
+
+    return sortBy(filtered, el => el.title)
+  }
 
   const renderList = () => {
     const addNew = () => navigate('/form')
@@ -53,7 +70,7 @@ const CollectionList = props => {
             </Grid>
             <Grid item xs={6}>
               <div className='right'>
-                <Search />
+                <Search searchFields={['keyword']}/>
               </div>
             </Grid>
           </Grid>
@@ -68,7 +85,7 @@ const CollectionList = props => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {collections.map(row => (
+              {filteredCollections().map(row => (
                 <TableRow key={row._id}>
                   <TableCell component="th" scope="row">
                     <Link

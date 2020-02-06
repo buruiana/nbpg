@@ -12,13 +12,15 @@ export function* watchGenerateCode({ payload }) {
   }
 
   try {
-    const code = yield put(
-      prettifyCode(
-        executeCodeGeneration(currentTemplate, customForms)
+    yield put(
+      setCode(
+        prettifyCode(
+          executeCodeGeneration(currentTemplate, customForms)
+        )
       )
     )
 
-    yield put(setCode(code.payload))
+    //yield put(setCode(code.payload))
   } catch (error) {
     yield put(setError(error.message))
   }

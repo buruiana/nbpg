@@ -1,4 +1,6 @@
 import get from "lodash/get"
+import isEmpty from 'lodash/isEmpty'
+import * as _ from 'lodash'
 
 const helper = ''
 
@@ -10,7 +12,7 @@ export const executeCodeGeneration = (currentTemplate, customForms) => {
 
     get(file, 'fileBlocks', []).map(block => {
       if (block.blockImplementation) {
-        code += new Function("forms", "helper", block.blockImplementation)(customForms, helper)
+        code += new Function("_", "forms", "helper", block.blockImplementation)(_, customForms, helper)
       }
 
     })

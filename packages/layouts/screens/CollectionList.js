@@ -28,8 +28,7 @@ const useStyles = makeStyles({
   table: { minWidth: 650 },
 })
 
-const CollectionList = props => {
-  const { navigate } = props
+const CollectionList = ({ navigate }) => {
   const dispatch = useDispatch()
 
   const collections = useSelector(collectionSelectors.collectionSelector) || []

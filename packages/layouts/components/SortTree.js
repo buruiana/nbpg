@@ -105,8 +105,9 @@ const SortTree = () => {
     <div className='row'>
       <div className='column50'
         style={{
-          height: count * 140 + 100,
+          height: count * 10 + 100,
           float: 'left',
+          minHeight: '800'
         }}
       >
         <SortableTree

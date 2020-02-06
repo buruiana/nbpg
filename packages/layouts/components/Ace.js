@@ -10,11 +10,9 @@ import {
   projectSelectors,
 } from '@bpgen/services'
 import AceTabs from './AceTabs'
-//import ExportFilesView from '../ExportFiles'
 
 const Ace = ( ) => {
-
-  const code = useSelector(codeGenSelectors.codeGenSelector) || []
+  const code = isEmpty(useSelector(codeGenSelectors.codeGenSelector))
   const currentTab = useSelector(projectSelectors.currentTabSelector) || ''
 
   // const onChange = newValue => {
@@ -27,7 +25,6 @@ const Ace = ( ) => {
 
   return (
     <div>
-      {/* <ExportFilesView /> */}
       <div className="paddingTop">
         <div>
           <AceTabs />
@@ -48,7 +45,7 @@ const Ace = ( ) => {
           showGutter={true}
           highlightActiveLine={true}
           value={getAceContent()}
-          height="750px"
+          height="700px"
         />
       </div>
     </div>

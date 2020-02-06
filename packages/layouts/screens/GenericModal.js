@@ -55,7 +55,7 @@ export default function FullScreenDialog() {
             >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" >{currentModal.type}</Typography>
+            <Typography variant="h6" >{currentModal.type.toUpperCase()}</Typography>
           </Toolbar>
         </AppBar>
         {modalHelper.getModalComponent(modals)}

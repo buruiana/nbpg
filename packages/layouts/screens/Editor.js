@@ -42,6 +42,8 @@ const Editor = () => {
   const code = useSelector(codeGenSelectors.codeGenSelector) || []
   const projectsCollection = get(collections.filter(e => e.title === 'projects'), [0], {})
   const projectsData = get(projectsCollection, 'data', [])
+  const currentTemplate = useSelector(projectSelectors.currentTemplateSelector) || {}
+  const isComponentTemplate = currentTemplate.isComponent || false
 
   if (isEmpty(projectSettings)) {
     dispatch(addModal({ type: 'projectSettings', data: {} }))
@@ -92,12 +94,15 @@ const Editor = () => {
     <div className={classes.root}>
       <CustomNavBar />
       <Grid container spacing={3}>
-        <Grid item md={10}>
-          <div className='left'>
-            <Search searchFields={['keyword', 'technos', 'providers']}/>
-          </div>
-        </Grid>
-        <Grid item md={2}>
+        {
+          isComponentTemplate &&
+          <Grid item md={10}>
+            <div className='left'>
+              <Search searchFields={['keyword', 'technos', 'providers']} />
+            </div>
+          </Grid>
+        }
+        <Grid item md={isComponentTemplate ? 2 : 12}>
           <div className='right'>
             <SaveIcon
               onClick={save}
@@ -126,8 +131,17 @@ const Editor = () => {
           </div>
         </Grid>
       </Grid>
-      <SortTree />
-      <Ace />
+      <Grid container spacing={3}>
+        {
+          isComponentTemplate &&
+          <Grid item md={8}>
+            <SortTree />
+          </Grid>
+        }
+        <Grid item md={isComponentTemplate ? 4 : 12}>
+          <Ace />
+        </Grid>
+      </Grid>
     </div>
   )
 }

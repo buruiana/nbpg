@@ -4,6 +4,7 @@ import {
   projectSelectors,
   removeModal,
   setError,
+  generateCode,
 } from '@bpgen/services'
 import React from 'react'
 import { withTheme } from 'react-jsonschema-form'
@@ -54,6 +55,7 @@ const CustomForm = () => {
       [currentForm.formName]: formData
     }
     dispatch(setCustomForms(newForms))
+    dispatch(generateCode({ currentTemplate, customForms: newForms}))
     dispatch(removeModal())
   }
 

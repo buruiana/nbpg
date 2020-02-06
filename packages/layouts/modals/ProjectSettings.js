@@ -63,13 +63,13 @@ const ProjectSettings = props => {
       "ui:placeholder": "Choose a template"
     },
     techno: {
-      "ui:placeholder": "Choose a template"
+      "ui:placeholder": "Choose a techno"
     },
   }
 
   const onSubmit = ({ formData }) => {
     const projectSettings = formData
-    const currentTemplate = get(templates.filter(e => e.title === formData.template), '[0]', [])
+    const currentTemplate = get(templates.filter(e => e.id === formData.template), '[0]', [])
     const aceTabs = get(currentTemplate, 'templateFiles', [])
       .filter(file => file.fileIsActive)
       .map(file => file.fileName)

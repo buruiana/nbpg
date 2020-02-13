@@ -39,7 +39,7 @@ const opt = {
   singleQuote: true,
   bracketSpacing: false,
   jsxBracketSameLine: true,
-  parser: `babel`,
+  parser: `typescript`,
   trailingComma: "all",
   arrowParens: "avoid",
   proseWrap: "preserve"

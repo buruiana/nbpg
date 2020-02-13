@@ -10,7 +10,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import { DeleteRounded } from '@material-ui/icons'
-
+import isEmpty from 'lodash/isEmpty'
 import StorageIcon from '@material-ui/icons/Storage'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Search from '@bpgen/layouts/components/Search'
@@ -28,6 +28,7 @@ import {
   setCurrentTab,
   setAceTabs,
   searchSelectors,
+  setInfo,
 } from '@bpgen/services'
 
 import get from 'lodash/get'
@@ -103,9 +104,9 @@ const CollectionData = props => {
   }
 
   return (
-    <div className='test'>
+    <>
       <Grid container spacing={3}>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Button
             onClick={() => navigate(`/list`)}
             color='secondary'
@@ -114,12 +115,13 @@ const CollectionData = props => {
           </Button>
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="h5">
+          <Typography variant="h6">
             {get(selectedCollection, 'title', '').toUpperCase()} DATA
           </Typography>
         </Grid>
-        {selectedCollection.title !== 'projects' &&
-          <Grid item xs={5} className='rightButton'>
+        {
+          selectedCollection.title !== 'projects' &&
+          <Grid item xs={4} className='rightButton'>
             <AddCircleOutlineIcon
               onClick={addNew}
               color='primary'
@@ -128,40 +130,45 @@ const CollectionData = props => {
             />
           </Grid>
         }
-        <div className='right'>
-          <Search searchFields={selectedCollection.searchFields}/>
-        </div>
-        <TableContainer component={Paper}>
-          <Table className='table' aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredData().map(row => (
-                <TableRow key={row.title}>
-                  <TableCell>{row.title}</TableCell>
-                  <TableCell align="right">
-                    <DeleteRounded
-                      onClick={() => deleteCollectionData(row.id)}
-                      color='primary'
-                      className='generic_link'
-                    />
-                    <StorageIcon
-                      color='primary'
-                      onClick={() => onClick(row)}
-                      className='generic_link'
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {
+          !isEmpty(filteredData()) &&
+          <>
+            <div className='right'>
+              <Search searchFields={selectedCollection.searchFields}/>
+            </div>
+            <TableContainer component={Paper}>
+              <Table className='table' aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell align="right">Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredData().map(row => (
+                    <TableRow key={row.title}>
+                      <TableCell>{row.title}</TableCell>
+                      <TableCell align="right">
+                        <DeleteRounded
+                          onClick={() => deleteCollectionData(row.id)}
+                          color='primary'
+                          className='generic_link'
+                        />
+                        <StorageIcon
+                          color='primary'
+                          onClick={() => onClick(row)}
+                          className='generic_link'
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        }
       </Grid>
-    </div>
+    </>
   )
 }
 

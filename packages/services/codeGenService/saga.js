@@ -1,6 +1,5 @@
-import { put, takeLatest, select, call } from "redux-saga/effects"
+import { put, takeLatest, call } from "redux-saga/effects"
 import isEmpty from "lodash/isEmpty"
-import get from "lodash/get"
 import { prettifyCode, setError, setCode } from '@bpgen/services'
 import { executeCodeGeneration } from "./helper"
 
@@ -12,15 +11,12 @@ export function* watchGenerateCode({ payload }) {
   }
 
   try {
-    yield put(
-      setCode(
-        prettifyCode(
-          executeCodeGeneration(currentTemplate, customForms)
-        )
-      )
+    const temp = executeCodeGeneration(currentTemplate, customForms)
+    const code = yield put(
+      prettifyCode(temp)  
     )
+    yield put(setCode(code.payload))
 
-    //yield put(setCode(code.payload))
   } catch (error) {
     yield put(setError(error.message))
   }

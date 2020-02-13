@@ -4,7 +4,7 @@ import "brace/mode/jsx"
 import "brace/theme/github"
 import isEmpty from "lodash/isEmpty"
 import get from "lodash/get"
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   codeGenSelectors,
   projectSelectors,
@@ -12,12 +12,9 @@ import {
 import AceTabs from './AceTabs'
 
 const Ace = ( ) => {
-  const code = isEmpty(useSelector(codeGenSelectors.codeGenSelector))
+  const code = useSelector(codeGenSelectors.codeGenSelector)
   const currentTab = useSelector(projectSelectors.currentTabSelector) || ''
 
-  // const onChange = newValue => {
-  //   console.log("change1", newValue)
-  // }
   const getAceContent = () => {
     if (isEmpty(code)) return ""
     return get(code.filter(e => e.id === currentTab), '[0].code', '')
@@ -33,8 +30,7 @@ const Ace = ( ) => {
         <AceEditor
           mode="jsx"
           theme="github"
-          //onChange={onChange}
-          name="UNIQUE_ID_OF_DIV"
+          name="ace-editor"
           editorProps={{ $blockScrolling: true }}
           setOptions={{
             showLineNumbers: true,

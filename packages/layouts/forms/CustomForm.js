@@ -30,7 +30,7 @@ const CustomForm = () => {
   const getTemplateForm = () => {
     let templateForm = {}
     get(currentTemplate, 'templateFiles', []).map(e => {
-      e.fileForms.filter(form => {
+      get(e, 'fileForms', []).filter(form => {
         if (form.formName === currentModal.type) {
           templateForm = form
         }

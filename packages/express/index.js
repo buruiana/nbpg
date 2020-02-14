@@ -35,10 +35,10 @@ const opt = {
   useTabs: false,
   printWidth: 60,
   tabWidth: 2,
-  semi: true,
+  semi: false,
   singleQuote: true,
-  bracketSpacing: false,
-  jsxBracketSameLine: true,
+  bracketSpacing: true,
+  jsxBracketSameLine: false,
   parser: `typescript`,
   trailingComma: "all",
   arrowParens: "avoid",
@@ -98,10 +98,10 @@ app.post("/api/prettify", (req, res) => {
     let theCode = "";
     if (e.code) theCode = e.code;
 
-    const newOpt = e.id === "styles.css" ? optCss : opt;
-    newCode.push({ id: e.id, code: prettier.format(theCode, newOpt) });
+    // const newOpt = e.id === "styles.css" ? optCss : opt;
+    
+    newCode.push({ id: e.id, code: prettier.format(theCode, opt) });
   });
-
   res.json(newCode);
 });
 

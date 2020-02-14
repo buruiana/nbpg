@@ -4,7 +4,7 @@ const backendService = createSlice({
   name: "backend",
   initialState: {},
   reducers: {
-    prettifyCode: (state, action) => { },
+    prettifyCode: (state, action) => {},
     createItem: (state, action) => {},
     readItem: (state, action) => {},
     updateItem: (state, action) => {},

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { setError } from '@bpgen/services'
+import { setCode } from '../codeGenService'
 
 const callBackend = (type, data) => {
   return axios.post(`http://localhost:5000/api/${type}`, { data })
@@ -15,9 +16,9 @@ const prettify = (code, parser) => {
 }
 
 export function* watchPrettifyCode(code, parser = 'babel') {
-  let prettyCode = []
   try {
     const res = yield prettify({ code, parser })
+    yield put(setCode(res.data))
     return res.data
   } catch (error) {
     yield put(setError(error.message))

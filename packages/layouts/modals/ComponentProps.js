@@ -82,7 +82,6 @@ const ComponentProps = props => {
     }
   })
 
-
   const onSubmit = ({ formData }) => {
     const newProps = []
 

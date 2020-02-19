@@ -33,7 +33,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-
 const Editor = () => {
   const dispatch = useDispatch()
   const classes = useStyles()

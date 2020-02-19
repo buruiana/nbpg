@@ -9,11 +9,7 @@ import {
   setProjectTree,
 } from '@bpgen/services'
 import { useDispatch, useSelector } from 'react-redux'
-import SortableTree, {
-  removeNodeAtPath,
-  getVisibleNodeCount
-} from "react-sortable-tree"
-
+import SortableTree, {removeNodeAtPath } from "react-sortable-tree"
 import InfoIcon from '@material-ui/icons/Info'
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
 import StorageIcon from '@material-ui/icons/Storage'
@@ -66,11 +62,6 @@ const SortTree = () => {
     return sortBy(filteredComponents, el => el.title)
   }
 
-  const count =
-    getVisibleNodeCount({ treeData: filteredDefaultTree() }) > 1
-      ? getVisibleNodeCount({ treeData: filteredDefaultTree() })
-      : 400
-
   const onChange = treeData => {
     try {
       if (treeData.length === 1) {
@@ -102,9 +93,9 @@ const SortTree = () => {
     <div className='row'>
       <div className='column50'
         style={{
-          height: count * 10 + 100,
+          height: window.innerHeight - 100,
           float: 'left',
-          minHeight: '800'
+          minHeight: window.innerHeight - 100
         }}
       >
         <SortableTree

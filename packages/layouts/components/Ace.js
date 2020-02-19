@@ -11,7 +11,7 @@ import {
 } from '@bpgen/services'
 import AceTabs from './AceTabs'
 
-const Ace = ( ) => {
+const Ace = () => {
   const code = useSelector(codeGenSelectors.codeGenSelector)
   const currentTab = useSelector(projectSelectors.currentTabSelector) || ''
 
@@ -41,7 +41,7 @@ const Ace = ( ) => {
           showGutter={true}
           highlightActiveLine={true}
           value={getAceContent()}
-          height="700px"
+          height={`${window.innerHeight - 150}px`}
         />
       </div>
     </div>

@@ -1,17 +1,17 @@
-import { put, takeLatest, call } from "redux-saga/effects"
+import { put, takeLatest, select } from "redux-saga/effects"
 import isEmpty from "lodash/isEmpty"
-import { prettifyCode, setError, setCode } from '@bpgen/services'
+import { prettifyCode, setError } from '@bpgen/services'
 import { executeCodeGeneration } from "./helper"
 
 export function* watchGenerateCode({ payload }) {
-  const { currentTemplate, customForms } = payload
+  const currentProject = (yield select()).projectServiceReducer.currentProject
 
-  if (isEmpty(currentTemplate)) {
+  if (isEmpty(currentProject.currentTemplate)) {
     yield put(setError('Template not provided for code generation'))
   }
 
   try {
-    const temp = executeCodeGeneration(currentTemplate, customForms)
+    const temp = executeCodeGeneration(currentProject)
     yield put(prettifyCode(temp))
   } catch (error) {
     yield put(setError(error.message))

@@ -25,11 +25,11 @@ const CustomForm = () => {
   const customForms = useSelector(projectSelectors.customFormsSelector) || []
   const currentModal = modals[modals.length - 1]
 
-  const currentTemplate = useSelector(projectSelectors.currentTemplateSelector) || []
+  const currentProject = useSelector(projectSelectors.currentProjectSelector) || []
 
   const getTemplateForm = () => {
     let templateForm = {}
-    get(currentTemplate, 'templateFiles', []).map(e => {
+    get(currentProject, 'currentTemplate.templateFiles', []).map(e => {
       get(e, 'fileForms', []).filter(form => {
         if (form.formName === currentModal.type) {
           templateForm = form
@@ -39,45 +39,53 @@ const CustomForm = () => {
     return templateForm
   }
 
-  const currentForm = !isEmpty(customForms[currentModal.type])
-    ? customForms[currentModal.type]
-    : getTemplateForm()
+  const currentForm = getTemplateForm()
 
   if (isEmpty(get(currentForm, 'formSchema', {}))) {
     dispatch(setError('Missing schema'))
     return null
   }
+  let formData = customForms[currentForm.formName] || {}
 
   let schema = {}
   let uiSchema = {}
 
   try {
     schema = new Function(
-      '_', 'collections',  'selectedElement',
-      currentForm.formSchema)(_, collections, currentTemplate) || {}
-      uiSchema = new Function(
+      '_', 'collections',  'currentProject',
+      currentForm.formSchema)(_, collections, currentProject) || {}
+    uiSchema = new Function(
       '_', 'collections',
       currentForm.formUiSchema)(_, collections) || {}
+    if(_.has(currentForm, 'formData')) {
+      formData = new Function(
+        '_', 'collections',  'currentProject',
+        currentForm.formData)(_, collections, currentProject) || {}
+    }
   } catch (error) {
     dispatch(setError(error.message))
   }
 
   const onSubmit = ({ formData }) => {
+    dispatch(removeModal())
     const newForms = {
       ...customForms,
       [currentForm.formName]: formData
     }
     dispatch(setCustomForms(newForms))
-    dispatch(generateCode({ currentTemplate, customForms: newForms}))
-    dispatch(removeModal())
+
+    dispatch(generateCode({ 
+      currentProject: { ...currentProject, customForms: newForms }
+    }))
   }
+
 
   return (
     <Container maxWidth="md">
       <Form
         schema={schema}
         onSubmit={onSubmit}
-        formData={currentForm}
+        formData={formData}
         uiSchema={uiSchema}
       >
         <div className='padd_top_bott'>

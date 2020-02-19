@@ -1,10 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import {
   projectSelectors,
   addModal,
   collectionSelectors,
   searchSelectors,
-  setCurrentProject,
   setError,
   generateCode,
   setProjectTree,
@@ -20,7 +19,6 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
 import StorageIcon from '@material-ui/icons/Storage'
 import "react-sortable-tree/style.css"
 
-import isEmpty from 'lodash/isEmpty'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
@@ -36,8 +34,7 @@ const SortTree = () => {
   const searchData = useSelector(searchSelectors.searchSelector) || {}
 
   const projectTree = useSelector(projectSelectors.projectTreeSelector) || []
-  const customForms = useSelector(projectSelectors.customFormsSelector) || {}
-  const currentTemplate = useSelector(projectSelectors.currentTemplateSelector) || {}
+  const currentProject = useSelector(projectSelectors.currentProjectSelector) || []
 
   const filteredDefaultTree = () => {
     const filteredComponents = components.filter(el => {
@@ -78,7 +75,7 @@ const SortTree = () => {
     try {
       if (treeData.length === 1) {
         dispatch(setProjectTree(treeData))
-        dispatch(generateCode({ currentTemplate, customForms }))
+        dispatch(generateCode({ currentProject }))
       } else {
         dispatch(setError("Tree length should be 1"))
       }
@@ -96,7 +93,7 @@ const SortTree = () => {
       })
 
     dispatch(setProjectTree(newTree))
-    dispatch(generateCode({ currentTemplate, customForms }))
+    dispatch(generateCode({ currentProject }))
   }
 
   const openModal = (type, node, path) => dispatch(addModal({ type, data: { node, path } }))

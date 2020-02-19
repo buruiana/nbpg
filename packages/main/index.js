@@ -1,5 +1,4 @@
 import NavBar from "@bpgen/layouts/components/NavBar"
-import CustomNavBar from "@bpgen/layouts/components/CustomNavBar"
 import CustomAlert from "@bpgen/layouts/components/CustomAlert"
 import GenericModal from "@bpgen/layouts/screens/GenericModal"
 import routes from '@bpgen/reach-router'
@@ -17,7 +16,6 @@ import { getCollections } from '@bpgen/services'
 const theme = createMuiTheme({})
 const bpGenStore = store()
 
-// init data
 bpGenStore.dispatch(getCollections())
 
 render(

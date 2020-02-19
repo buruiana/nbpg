@@ -20,15 +20,9 @@ import {
   updateItem,
   getCollections,
   collectionSelectors,
-  setProjectSettings,
-  setCustomForms,
-  setCurrentTemplate,
-  setProjectTree,
+  setCurrentProject,
   generateCode,
-  setCurrentTab,
-  setAceTabs,
   searchSelectors,
-  setInfo,
 } from '@bpgen/services'
 
 import get from 'lodash/get'
@@ -90,13 +84,8 @@ const CollectionData = props => {
 
   const onClick = row => {
     if (selectedCollection.title === 'projects') {
-      dispatch(setProjectSettings(row.projectSettings))
-      dispatch(setCustomForms(row.customForms))
-      dispatch(setProjectTree(row.projectTree))
-      dispatch(setCurrentTemplate(row.currentTemplate))
-      dispatch(setAceTabs(row.aceTabs))
-      dispatch(setCurrentTab(row.currentTab))
-      dispatch(generateCode({ currentTemplate: row.currentTemplate, customForm: row.customForm }))
+      dispatch(setCurrentProject(row))
+      dispatch(generateCode({ currentProject: row }))
       navigate('/editor')
     } else {
       navigate(`/editdata/${id}/${getId(row)}`)

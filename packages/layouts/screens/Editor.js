@@ -4,9 +4,9 @@ import { addModal } from '@bpgen/services'
 import CustomNavBar from "@bpgen/layouts/components/CustomNavBar"
 import SortTree from '../components/SortTree'
 import SaveIcon from '@material-ui/icons/Save'
-import CodeIcon from '@material-ui/icons/Code'
 import ImportExportIcon from '@material-ui/icons/ImportExport'
 import SettingsIcon from '@material-ui/icons/Settings'
+import AutorenewIcon from '@material-ui/icons/Autorenew'
 import {
   projectSelectors,
   collectionSelectors,
@@ -14,6 +14,7 @@ import {
   updateItem,
   getCollections,
   setInfo,
+  setCurrentProject,
   exportFiles,
 } from '@bpgen/services'
 import isEmpty from 'lodash/isEmpty'
@@ -43,7 +44,7 @@ const Editor = () => {
   const projectsCollection = get(collections.filter(e => e.title === 'projects'), [0], {})
   const projectsData = get(projectsCollection, 'data', [])
   const currentTemplate = useSelector(projectSelectors.currentTemplateSelector) || {}
-  const isComponentTemplate = currentTemplate.isComponent || false
+  const isComponentTemplate = currentTemplate.templateIsComponent || false
 
   if (isEmpty(projectSettings)) {
     dispatch(addModal({ type: 'projectSettings', data: {} }))
@@ -90,6 +91,8 @@ const Editor = () => {
     dispatch(exportFiles({ data }))
   }
 
+  const initProject = () => dispatch(setCurrentProject({}))
+
   return (
     <div className={classes.root}>
       <CustomNavBar />
@@ -104,14 +107,14 @@ const Editor = () => {
         }
         <Grid item md={isComponentTemplate ? 2 : 12}>
           <div className='right'>
-            <SaveIcon
-              onClick={save}
+            <AutorenewIcon
+              onClick={initProject}
               color='primary'
               fontSize="large"
               className='generic_link'
             />
-            <CodeIcon
-              onClick={onClick}
+            <SaveIcon
+              onClick={save}
               color='primary'
               fontSize="large"
               className='generic_link'

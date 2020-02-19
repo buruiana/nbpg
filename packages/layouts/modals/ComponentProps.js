@@ -103,7 +103,7 @@ const ComponentProps = props => {
     })
 
     dispatch(setProjectTree(newTree))
-    dispatch(generateCode({ currentTemplate, customForms}))
+    dispatch(generateCode({ currentProject}))
     dispatch(removeModal())
   }
 

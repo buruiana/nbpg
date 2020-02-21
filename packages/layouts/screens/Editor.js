@@ -16,6 +16,7 @@ import {
   setInfo,
   setCurrentProject,
   exportFiles,
+  setCode,
 } from '@bpgen/services'
 import isEmpty from 'lodash/isEmpty'
 import get from 'lodash/get'
@@ -90,7 +91,10 @@ const Editor = () => {
     dispatch(exportFiles({ data }))
   }
 
-  const initProject = () => dispatch(setCurrentProject({}))
+  const initProject = () => {
+    dispatch(setCurrentProject({}))
+    dispatch(setCode({}))
+  }
 
   return (
     <div className={classes.root}>

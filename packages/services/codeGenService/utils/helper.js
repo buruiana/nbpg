@@ -179,7 +179,6 @@ export const getTree = flatTree => {
         code += `</ ${el}>`
       })
     }
-
     return code
   }
 

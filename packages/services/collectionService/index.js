@@ -8,14 +8,14 @@ const collectionService = createSlice({
     collectionTree: [],
   },
   reducers: {
-    getCollections: () => { },
+    getCollections: () => {},
     setCollections: (state, action) => {
       state.collections = action.payload
     },
     setCollectionTree: (state, action) => {
       state.collectionTree = action.payload
     },
-    getCollectionTree: () => { },
+    getCollectionTree: () => {},
   }
 })
 

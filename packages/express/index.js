@@ -99,7 +99,6 @@ app.post("/api/prettify", (req, res) => {
     if (e.code) theCode = e.code;
 
     // const newOpt = e.id === "styles.css" ? optCss : opt;
-    
     newCode.push({ id: e.id, code: prettier.format(theCode, opt) });
   });
   res.json(newCode);

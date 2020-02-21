@@ -14,7 +14,6 @@ export const getFlatForms = files => {
   return flatForms
 }
 
-
 export const fillNodeData = (treeData, providers) => {
   walk({
     treeData: treeData,

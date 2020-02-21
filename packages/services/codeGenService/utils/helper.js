@@ -155,7 +155,6 @@ export const getTree = flatTree => {
 
         // check if current element is the last child
         if (currentId === currentParentLastChild.uniqId && !hasChildren && parentsList.length > 1) {
-          console.log('console: 111111111111', parentsList)
           code += `</ ${parentsList[parentsList.length - 1]}>`
           parentsList.pop()
         }
@@ -176,7 +175,6 @@ export const getTree = flatTree => {
 
     // close remaining parents
     if (parentsList.length) {
-      console.log('console: ---------------------------', reverse(parentsList))
       reverse(parentsList).map(el => {
         code += `</ ${el}>`
       })

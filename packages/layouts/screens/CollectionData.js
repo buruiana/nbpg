@@ -135,7 +135,7 @@ const CollectionData = props => {
                 </TableHead>
                 <TableBody>
                   {filteredData().map(row => (
-                    <TableRow key={row.title}>
+                    <TableRow key={row.id}>
                       <TableCell>{row.title}</TableCell>
                       <TableCell align="right">
                         <DeleteRounded

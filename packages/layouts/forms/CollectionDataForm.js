@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { withTheme } from 'react-jsonschema-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Theme as MuiTheme } from 'rjsf-material-ui'
-import { updateItem, createItem, getCollections, collectionSelectors } from '@bpgen/services'
+import { updateItem, getCollections, collectionSelectors } from '@bpgen/services'
 import Button from '@material-ui/core/Button'
 import { setError } from '@bpgen/services'
 import * as _ from 'lodash'
 
 const CollectionDataForm = props => {
-
   const { id, navigate, el } = props
   const Form = withTheme(MuiTheme)
   const dispatch = useDispatch()
@@ -16,9 +15,9 @@ const CollectionDataForm = props => {
   const selectedCollection = _.get(collections.filter(e => e._id === id), '[0]', {})
   const { jfSchema, jfUiSchema, data=[] } = selectedCollection
 
-  const selectedElement = _.get(
-    data.filter(e => _.get(e, 'id', '') === el), '[0]', []
-  )
+  const selectedElement = _.isEmpty(_.get(props, 'location.state.row', false))
+    ? _.get(data.filter(e => _.get(e, 'id', '') === el), '[0]', [])
+    : props.location.state.row
 
   let schema = {}
   let uiSchema = {}
@@ -43,7 +42,6 @@ const CollectionDataForm = props => {
     }
 
     dispatch(updateItem({ type: 'collections', data: newCollection }))
-
     dispatch(getCollections())
     navigate(`/data/${id}`)
   }

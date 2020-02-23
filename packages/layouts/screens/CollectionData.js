@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import { DeleteRounded } from '@material-ui/icons'
 import isEmpty from 'lodash/isEmpty'
 import StorageIcon from '@material-ui/icons/Storage'
+import FileCopyIcon from '@material-ui/icons/FileCopy'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Search from '@bpgen/layouts/components/Search'
 import { useSelector, useDispatch } from 'react-redux'
@@ -69,7 +70,12 @@ const CollectionData = props => {
     return sortBy(filtered, el => el.title)
   }
 
-  const addNew = () => navigate(`/editdata/${id}/new`)
+  const addNew = row => {
+    !isEmpty(row)
+      ? navigate(`/editdata/${id}/new`, { state: { row }})
+      : navigate(`/editdata/${id}/new`)
+  }
+
   const deleteCollectionData = item => {
     const data = get(selectedCollection, 'data', []).filter(e => e.id !== item)
     const newCollection = {
@@ -146,6 +152,11 @@ const CollectionData = props => {
                         <StorageIcon
                           color='primary'
                           onClick={() => onClick(row)}
+                          className='generic_link'
+                        />
+                        <FileCopyIcon
+                          onClick={() => addNew(row)}
+                          color='primary'
                           className='generic_link'
                         />
                       </TableCell>

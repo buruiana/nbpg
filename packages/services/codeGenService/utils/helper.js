@@ -1,6 +1,7 @@
 import { getFlatDataFromTree } from "react-sortable-tree"
 import get from "lodash/get"
 import uniqBy from "lodash/uniqBy"
+import has from "lodash/has"
 import sortBy from "lodash/sortBy"
 import groupBy from "lodash/groupBy"
 import isEmpty from 'lodash/isEmpty'
@@ -93,6 +94,7 @@ export const getTree = flatTree => {
 
   const prepareTree = tree => {
     tree.map(el => {
+      console.log('console: -----------------', el)
       const theTitle = el.node.title.replace("__", ".")
       const currentId = el.node.uniqId
       const nextEl = tree.length > elIdx + 1 ? tree[elIdx + 1] : null
@@ -100,6 +102,21 @@ export const getTree = flatTree => {
       const hasComponentProps = !isEmpty(el.node.componentProps)
       const hasParent = !isEmpty(el.parentNode)
       const closeTag = hasChildren ? ">" : " />"
+      // const isChildrenRequired = () => 
+      //   !isEmpty(
+      //     get(el, 'node.componentProps', [])
+      //       .filter(
+      //         el => get(el, 'title', '') === 'children' && get(el, 'propTypeIsRequired', false)
+      //       )
+      //   )
+
+      //   console.log('console: isChildrenRequired', isChildrenRequired(), el.node.componentProps)
+
+      // const closeTag = !hasChildren || !isChildrenRequired()
+      //   ? !isChildrenRequired()
+      //     ? ">" 
+      //     : `>default text</ ${el.node.title}>`
+      //   : " />"
 
       if (hasChildren) parentsList.push(theTitle)
 
@@ -110,7 +127,7 @@ export const getTree = flatTree => {
             START: "'",
             END: "'",
           }
-        } else if (type.includes('object') || type.includes('function') || type.includes('bool')) {
+        } else if (type.includes('object') || type.includes('func') || type.includes('bool')) {
           return {
             START: "{",
             END: "}",
@@ -133,9 +150,9 @@ export const getTree = flatTree => {
         let componentProps = ""
         if (hasComponentProps) {
           get(el, 'node.componentProps', []).map(el => {
-
             const wrapper = getWrapper(el.propTypeProp)
-            if (!isEmpty(el.val)) componentProps += `\n${el.title}=${wrapper.START}${el.val.trim()}${wrapper.END}\n`
+            if (!isEmpty(el.val)) componentProps += 
+              `\n${el.title}=${wrapper.START}${el.val.trim()}${wrapper.END}\n`
           })
         }
         return componentProps

@@ -13,8 +13,10 @@ const Collection = require("./models/Collection");
 const app = express();
 app.use(cors());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '100mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}))
+
+
 const server = http.createServer(app);
 
 const mongo_uri = "mongodb://localhost/bpGen";

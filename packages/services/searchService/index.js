@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import * as selectors from './selectors'
 
 const searchService = createSlice({
-  name: "search",
+  name: 'search',
   initialState: {
     search: {},
   },

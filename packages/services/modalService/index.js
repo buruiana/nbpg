@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import * as selectors from './selectors'
 import * as helper from './helper'
-import dropRight from "lodash/dropRight"
+import dropRight from 'lodash/dropRight'
 
 const modalService = createSlice({
-  name: "modal",
+  name: 'modal',
   initialState: {
     modals: [],
   },

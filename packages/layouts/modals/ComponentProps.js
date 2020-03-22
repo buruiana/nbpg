@@ -24,11 +24,9 @@ const ComponentProps = props => {
   const modals = useSelector(modalSelectors.modalSelector) || []
   const currentProject = useSelector(projectSelectors.currentProjectSelector) || []
   const customForms = useSelector(projectSelectors.customFormsSelector) || {}
-  const currentTemplate = useSelector(projectSelectors.currentTemplateSelector) || {}
   const { data: { node, path }} = modals[modals.length - 1]
 
   const tree = currentProject.projectTree
-  const forms = customForms
 
   const uiSchema = { componentProps: {} }
   const schema = {

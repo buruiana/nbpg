@@ -26,9 +26,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     minWidth: 120,
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
+  selectEmpty: { marginTop: theme.spacing(2) },
 }))
 
 const Search = ({ searchFields='' }) => {
@@ -71,32 +69,32 @@ const Search = ({ searchFields='' }) => {
     <>
       {
         searchFields.includes('keyword') &&
-        <FormControl variant="filled" className={classes.formControl}>
+        <FormControl variant='filled' className={classes.formControl}>
           <TextField
-            name="keyword"
-            label="Search"
-            variant="outlined"
+            name='keyword'
+            label='Search'
+            variant='outlined'
             onChange={handleChange}
           />
         </FormControl>
       }
       {
         searchFields.includes('technos') &&
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant='outlined' className={classes.formControl}>
           <InputLabel
             ref={inputLabel}
-            id="techno_label"
+            id='techno_label'
           >
             Technos
         </InputLabel>
           <Select
-            labelId="demo-simple-select-outlined-label"
-            name="techno"
+            labelId='demo-simple-select-outlined-label'
+            name='techno'
             value={searchData.techno || 'all'}
             onChange={handleChange}
             labelWidth={labelWidth}
           >
-            <MenuItem value="all">
+            <MenuItem value='all'>
               <em>All</em>
             </MenuItem>
             {getTechnos()}
@@ -105,20 +103,20 @@ const Search = ({ searchFields='' }) => {
       }
       {
         searchFields.includes('providers') &&
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant='outlined' className={classes.formControl}>
           <InputLabel
             ref={inputLabel}
-            id="provider_label">
+            id='provider_label'>
             Providers
           </InputLabel>
           <Select
-            labelId="demo-simple-select-outlined-label"
-            name="provider"
+            labelId='demo-simple-select-outlined-label'
+            name='provider'
             value={searchData.provider || 'all'}
             onChange={handleChange}
             labelWidth={labelWidth}
           >
-            <MenuItem value="all">
+            <MenuItem value='all'>
               <em>All</em>
             </MenuItem>
             {getProviders()}

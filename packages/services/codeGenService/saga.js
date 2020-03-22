@@ -1,9 +1,9 @@
-import { put, takeLatest, select } from "redux-saga/effects"
-import isEmpty from "lodash/isEmpty"
+import { put, takeLatest, select } from 'redux-saga/effects'
+import isEmpty from 'lodash/isEmpty'
 import { prettifyCode, setError } from '@bpgen/services'
-import { executeCodeGeneration } from "./helper"
+import { executeCodeGeneration } from './helper'
 
-export function* watchGenerateCode({ payload }) {
+export function* watchGenerateCode() {
   const currentProject = (yield select()).projectServiceReducer.currentProject
 
   if (isEmpty(currentProject.currentTemplate)) {

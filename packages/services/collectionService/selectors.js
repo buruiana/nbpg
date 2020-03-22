@@ -1,4 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit"
+import { createSelector } from '@reduxjs/toolkit'
 
 const collections = state => state.collectionServiceReducer.collections
 const collectionTree = state => state.collectionServiceReducer.collectionTree

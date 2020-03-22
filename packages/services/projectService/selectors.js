@@ -1,4 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit"
+import { createSelector } from '@reduxjs/toolkit'
 
 const currentProject = state => state.projectServiceReducer.currentProject
 const projects = state => state.projectServiceReducer.projects

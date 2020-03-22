@@ -1,11 +1,11 @@
-import { getFlatDataFromTree } from "react-sortable-tree"
-import get from "lodash/get"
-import uniqBy from "lodash/uniqBy"
-import has from "lodash/has"
-import sortBy from "lodash/sortBy"
-import groupBy from "lodash/groupBy"
+import { getFlatDataFromTree } from 'react-sortable-tree'
+import get from 'lodash/get'
+import uniqBy from 'lodash/uniqBy'
+import has from 'lodash/has'
+import sortBy from 'lodash/sortBy'
+import groupBy from 'lodash/groupBy'
 import isEmpty from 'lodash/isEmpty'
-import reverse from "lodash/reverse"
+import reverse from 'lodash/reverse'
 import * as lodash from 'lodash'
 
 export const getFlatDataFromTree1 = getFlatDataFromTree
@@ -22,7 +22,7 @@ export const getConstList = tree => {
   flatData.map(el => {
     return el.node.componentProps.filter(prop => {
       if (!isEmpty(prop.val) && get(prop, 'propTypeProp', []).includes('func')) {
-        constList.push(prop.val.replace(/[\W_]+/g, ""))
+        constList.push(prop.val.replace(/[\W_]+/g, ''))
       }
     })
   })
@@ -42,7 +42,7 @@ export const getStylesList = tree => {
   flatData.map(el => {
     return el.node.componentProps.filter(prop => {
       if (!isEmpty(prop.val) && prop.title === 'style') {
-        stylesList.push(prop.val.replace(/[\W_]+/g, ""))
+        stylesList.push(prop.val.replace(/[\W_]+/g, ''))
       }
     })
   })
@@ -61,22 +61,22 @@ export const getImportList = tree => {
     flatData.filter(
       el => get(el, 'node.isDefault', false)
     ),
-    "node.componentImport"
+    'node.componentImport'
   )
-  const sortedDefaultImports = sortBy(defaultImports, "node.title")
+  const sortedDefaultImports = sortBy(defaultImports, 'node.title')
 
   const nonDefaultImports = uniqBy(
     flatData.filter(
-      el => !get(el, 'node.isDefault', false) && el.node.provider !== "html"
+      el => !get(el, 'node.isDefault', false) && el.node.provider !== 'html'
     ),
-    "node.title"
+    'node.title'
   )
 
-  const sortedNonDefaultImports = sortBy(nonDefaultImports, "node.title")
+  const sortedNonDefaultImports = sortBy(nonDefaultImports, 'node.title')
 
   const groupSortedNonDefaultImports = groupBy(
     sortedNonDefaultImports,
-    "node.componentImport"
+    'node.componentImport'
   )
 
   const importList = {
@@ -88,21 +88,21 @@ export const getImportList = tree => {
 }
 
 export const getTree = flatTree => {
-  let code = ""
+  let code = ''
   let parentsList = []
   let elIdx = 0
 
   const prepareTree = tree => {
     tree.map(el => {
       console.log('console: -----------------', el)
-      const theTitle = el.node.title.replace("__", ".")
+      const theTitle = el.node.title.replace('__', '.')
       const currentId = el.node.uniqId
       const nextEl = tree.length > elIdx + 1 ? tree[elIdx + 1] : null
       const hasChildren = !isEmpty(el.node.children)
       const hasComponentProps = !isEmpty(el.node.componentProps)
       const hasParent = !isEmpty(el.parentNode)
-      const closeTag = hasChildren ? ">" : " />"
-      // const isChildrenRequired = () => 
+      const closeTag = hasChildren ? '>' : ' />'
+      // const isChildrenRequired = () =>
       //   !isEmpty(
       //     get(el, 'node.componentProps', [])
       //       .filter(
@@ -114,9 +114,9 @@ export const getTree = flatTree => {
 
       // const closeTag = !hasChildren || !isChildrenRequired()
       //   ? !isChildrenRequired()
-      //     ? ">" 
+      //     ? '>'
       //     : `>default text</ ${el.node.title}>`
-      //   : " />"
+      //   : ' />'
 
       if (hasChildren) parentsList.push(theTitle)
 
@@ -129,13 +129,13 @@ export const getTree = flatTree => {
           }
         } else if (type.includes('object') || type.includes('func') || type.includes('bool')) {
           return {
-            START: "{",
-            END: "}",
+            START: '{',
+            END: '}',
           }
         } else if (type.includes('array')) {
           return {
-            START: "[",
-            END: "]",
+            START: '[',
+            END: ']',
           }
         } else {
           return {
@@ -147,11 +147,11 @@ export const getTree = flatTree => {
 
 
       const getComponentProps = () => {
-        let componentProps = ""
+        let componentProps = ''
         if (hasComponentProps) {
           get(el, 'node.componentProps', []).map(el => {
             const wrapper = getWrapper(el.propTypeProp)
-            if (!isEmpty(el.val)) componentProps += 
+            if (!isEmpty(el.val)) componentProps +=
               `\n${el.title}=${wrapper.START}${el.val.trim()}${wrapper.END}\n`
           })
         }
@@ -179,7 +179,7 @@ export const getTree = flatTree => {
           parentsList.pop()
         }
 
-        // check next elemen path
+        // check next element path
         if (
           !isEmpty(nextEl) &&
           currentParent[0].path.length > nextEl.path.length

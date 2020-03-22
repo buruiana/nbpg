@@ -24,9 +24,7 @@ import StorageIcon from '@material-ui/icons/Storage'
 
 import Search from '@bpgen/layouts/components/Search'
 
-const useStyles = makeStyles({
-  table: { minWidth: 650 },
-})
+const useStyles = makeStyles({ table: { minWidth: 650 } })
 
 const CollectionList = ({ navigate }) => {
   const dispatch = useDispatch()
@@ -37,10 +35,9 @@ const CollectionList = ({ navigate }) => {
 
   const filteredCollections = () => {
     const filtered = collections.filter(el => {
-      if (get(searchData, 'keyword', '')) {
-        return (el.title.toLowerCase().indexOf(searchData.keyword.toLowerCase()) !== -1)
-      }
-      return []
+      return get(searchData, 'keyword', '')
+        ? el.title.toLowerCase().indexOf(searchData.keyword.toLowerCase()) !== -1
+        : []
     })
 
     return sortBy(filtered, el => el.title)

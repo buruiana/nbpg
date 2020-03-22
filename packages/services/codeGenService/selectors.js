@@ -1,4 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit"
+import { createSelector } from '@reduxjs/toolkit'
 
 const code = state => state.codeGenServiceReducer.code
 

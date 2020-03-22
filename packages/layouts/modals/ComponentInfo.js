@@ -2,8 +2,6 @@ import {
   modalSelectors,
 } from '@bpgen/services'
 import React from 'react'
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked'
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
@@ -16,9 +14,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const useStyles = makeStyles(theme => ({
-  title: {
-    flexGrow: 1,
-  },
+  title: { flexGrow: 1 },
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),

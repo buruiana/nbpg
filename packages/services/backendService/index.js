@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const backendService = createSlice({
-  name: "backend",
+  name: 'backend',
   initialState: {},
   reducers: {
     prettifyCode: (state, action) => {},

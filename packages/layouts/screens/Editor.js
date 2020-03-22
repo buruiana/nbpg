@@ -26,12 +26,8 @@ import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  right1: {
-    width: '100%',
-  }
+  root: { flexGrow: 1 },
+  right: { width: '100%' }
 }))
 
 const Editor = () => {

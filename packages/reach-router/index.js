@@ -12,7 +12,7 @@ const CollectionList = React.lazy(() =>
 const CollectionData = React.lazy(() =>
   import('@bpgen/layouts/screens/CollectionData')
 )
-const ColectionDataForm = React.lazy(() =>
+const CollectionDataForm = React.lazy(() =>
   import('@bpgen/layouts/forms/CollectionDataForm')
 )
 const Editor = React.lazy(() =>
@@ -29,7 +29,7 @@ const routes = (
         <CollectionsForm path='form' />
         <CollectionList path='list' />
         <CollectionData path='data/:id' />
-        <ColectionDataForm path='editdata/:id/:el' />
+        <CollectionDataForm path='editdata/:id/:el' />
         <Editor path='editor' />
         <NotFound default />
       </Router>

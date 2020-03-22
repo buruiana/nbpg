@@ -14,9 +14,7 @@ import { modalSelectors, modalHelper, removeModal } from '@bpgen/services'
 import isEmpty from 'lodash/isEmpty'
 
 const useStyles = makeStyles(theme => ({
-  appBar: {
-    position: 'relative',
-  },
+  appBar: { position: 'relative' },
   title: {
     padding: 2,
     flex: 1,

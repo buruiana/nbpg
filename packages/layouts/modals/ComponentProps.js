@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import { Theme as MuiTheme } from 'rjsf-material-ui'
-import isEmpty from "lodash/isEmpty"
-import get from "lodash/get"
-import { changeNodeAtPath } from "react-sortable-tree"
+import isEmpty from 'lodash/isEmpty'
+import get from 'lodash/get'
+import { changeNodeAtPath } from 'react-sortable-tree'
 import {
   projectSelectors,
   modalSelectors,
@@ -32,11 +32,11 @@ const ComponentProps = props => {
 
   const uiSchema = { componentProps: {} }
   const schema = {
-    type: "object",
+    type: 'object',
     properties: {}
   }
   const properties = schema.properties
-  const propsInfo = get(node, "componentProps", [])
+  const propsInfo = get(node, 'componentProps', [])
 
   propsInfo.map(prop => {
     const { title, propTypeVal, val, propTypeProp } = prop
@@ -45,15 +45,15 @@ const ComponentProps = props => {
       const propEnum = ['true', 'false']
 
       properties[title] = {
-        type: "string",
+        type: 'string',
         title: title,
         enum: propEnum,
         default: val
       }
 
       uiSchema[title] = {
-        "ui:placeholder": "Select",
-        "ui:options": {
+        'ui:placeholder': 'Select',
+        'ui:options': {
           label: true
         }
       }
@@ -61,21 +61,21 @@ const ComponentProps = props => {
       const propEnum = propTypeVal.replace(/'/g, '').split('|')
 
       properties[title] = {
-        type: "string",
+        type: 'string',
         title: title,
         enum: propEnum,
         default: val
       }
 
       uiSchema[title] = {
-        "ui:placeholder": "Select",
-        "ui:options": {
+        'ui:placeholder': 'Select',
+        'ui:options': {
           label: true
         }
       }
     } else {
       properties[title] = {
-        type: "string",
+        type: 'string',
         title: title,
         default: val
       }
@@ -108,19 +108,19 @@ const ComponentProps = props => {
 
   const log = type => console.log.bind(console, type)
   return (
-    <Container maxWidth="md">
+    <Container maxWidth='md'>
       <Form
         schema={schema}
         uiSchema={uiSchema}
-        onChange={log("changed")}
+        onChange={log('changed')}
         onSubmit={onSubmit}
-        onError={log("errors")}
+        onError={log('errors')}
       >
         <div className='padd_top_bott'>
           <Button
-            variant="contained"
-            color="primary"
-            type="submit"
+            variant='contained'
+            color='primary'
+            type='submit'
           >
             Submit
           </Button>

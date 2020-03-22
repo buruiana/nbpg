@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addModal } from '@bpgen/services'
-import CustomNavBar from "@bpgen/layouts/components/CustomNavBar"
+import CustomNavBar from '@bpgen/layouts/components/CustomNavBar'
 import SortTree from '../components/SortTree'
 import SaveIcon from '@material-ui/icons/Save'
 import ImportExportIcon from '@material-ui/icons/ImportExport'
@@ -46,10 +46,10 @@ const Editor = () => {
   const currentTemplate = useSelector(projectSelectors.currentTemplateSelector) || {}
   const isComponentTemplate = currentTemplate.templateIsComponent || false
 
-  if (isEmpty(projectSettings)) {
-    dispatch(addModal({ type: 'projectSettings', data: {} }))
-    return null
-  }
+  // if (isEmpty(projectSettings)) {
+  //   dispatch(addModal({ type: 'projectSettings', data: {} }))
+  //   return null
+  // }
 
   const onClick = () => dispatch(addModal({ type: 'projectSettings', data: {} }))
   const save = () => {
@@ -113,25 +113,25 @@ const Editor = () => {
             <AutorenewIcon
               onClick={initProject}
               color='primary'
-              fontSize="large"
+              fontSize='large'
               className='generic_link'
             />
             <SaveIcon
               onClick={save}
               color='primary'
-              fontSize="large"
+              fontSize='large'
               className='generic_link'
             />
             <ImportExportIcon
               onClick={exportProjectFiles}
               color='primary'
-              fontSize="large"
+              fontSize='large'
               className='generic_link'
             />
             <SettingsIcon
               onClick={onClick}
               color='primary'
-              fontSize="large"
+              fontSize='large'
               className='generic_link'
             />
           </div>

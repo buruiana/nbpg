@@ -14,8 +14,8 @@ function TabPanel(props) {
 
   return (
     <Typography
-      component="div"
-      role="tabpanel"
+      component='div'
+      role='tabpanel'
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -62,8 +62,8 @@ const AceTabs = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={aceTabs.indexOf(currentTab)} onChange={handleChange} aria-label="simple tabs example">
+      <AppBar position='static'>
+        <Tabs value={aceTabs.indexOf(currentTab)} onChange={handleChange} aria-label='simple tabs example'>
           {renderTabs()}
         </Tabs>
       </AppBar>

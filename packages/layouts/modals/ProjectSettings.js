@@ -30,27 +30,27 @@ const ProjectSettings = props => {
   const Form = withTheme(MuiTheme)
 
   const schema = {
-    type: "object",
+    type: 'object',
     required: ['title', 'template'],
     properties: {
       title: {
-        type: "string",
-        title: "Project Title",
+        type: 'string',
+        title: 'Project Title',
         default: get(currentProject.title, '')
       },
       destination: {
-        type: "string",
+        type: 'string',
         title: 'Destination',
         default: get(currentProject.destination, '')
       },
       techno: {
-        type: "string",
+        type: 'string',
         title: 'Techno',
         enum: getTechnosEnum(),
         enumNames: getTechnosEnumNames(),
       },
       template: {
-        type: "string",
+        type: 'string',
         title: 'Template',
         enum: getTemplatesTypesEnum(),
         enumNames: getTemplatesTypesEnumNames(),
@@ -60,10 +60,10 @@ const ProjectSettings = props => {
 
   const uiSchema = {
     template: {
-      "ui:placeholder": "Choose a template"
+      'ui:placeholder': 'Choose a template'
     },
     techno: {
-      "ui:placeholder": "Choose a techno"
+      'ui:placeholder': 'Choose a techno'
     },
   }
 
@@ -84,7 +84,7 @@ const ProjectSettings = props => {
   const onChange = () => undefined
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth='md'>
       <div>
         <Form
           schema={schema}
@@ -95,9 +95,9 @@ const ProjectSettings = props => {
         >
           <div className='padd_top_bott'>
             <Button
-              variant="contained"
-              color="primary"
-              type="submit"
+              variant='contained'
+              color='primary'
+              type='submit'
             >
               Submit
         </Button>

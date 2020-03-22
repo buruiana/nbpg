@@ -64,9 +64,9 @@ const CollectionDataForm = props => {
       >
         <div className='padd_top_bott'>
           <Button
-            variant="contained"
-            color="primary"
-            type="submit"
+            variant='contained'
+            color='primary'
+            type='submit'
           >
             Submit
         </Button>

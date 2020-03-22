@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />
+  return <Slide direction='up' ref={ref} {...props} />
 })
 
 export default function FullScreenDialog() {
@@ -37,7 +37,7 @@ export default function FullScreenDialog() {
   const handleClose = () => dispatch(removeModal())
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth='xl'>
       <Dialog
         maxWidth='xl'
         open={true}
@@ -48,14 +48,14 @@ export default function FullScreenDialog() {
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton
-              edge="start"
-              color="inherit"
+              edge='start'
+              color='inherit'
               onClick={handleClose}
-              aria-label="close"
+              aria-label='close'
             >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" >{currentModal.type.toUpperCase()}</Typography>
+            <Typography variant='h6' >{currentModal.type.toUpperCase()}</Typography>
           </Toolbar>
         </AppBar>
         {modalHelper.getModalComponent(modals)}

@@ -30,7 +30,7 @@ const CollectionsForm = props => {
   }
 
   const uiSchema = {
-    _id: { "ui:widget": "hidden" },
+    _id: { 'ui:widget': 'hidden' },
     jfSchema: {
       'ui:widget': 'textarea',
       'ui:options': {
@@ -58,7 +58,7 @@ const CollectionsForm = props => {
     <div>
       <Button
         onClick={() => navigate(`/list`)}
-        component="button"
+        component='button'
         color='secondary'
       >
         Back
@@ -72,9 +72,9 @@ const CollectionsForm = props => {
       >
         <div className='padd_top_bott'>
           <Button
-            variant="contained"
-            color="primary"
-            type="submit"
+            variant='contained'
+            color='primary'
+            type='submit'
           >
             Submit
         </Button>

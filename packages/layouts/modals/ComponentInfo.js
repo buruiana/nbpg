@@ -4,7 +4,7 @@ import {
 import React from 'react'
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked'
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
-import Typography from "@material-ui/core/Typography"
+import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import TextField from '@material-ui/core/TextField'
@@ -51,8 +51,8 @@ const ProjectSettings = props => {
         <ExpansionPanel key={e.title}>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
+            aria-controls='panel1a-content'
+            id='panel1a-header'
           >
             <Typography className={classes.heading}>{e.title} : {e.propTypeProp}</Typography>
           </ExpansionPanelSummary>
@@ -67,40 +67,40 @@ const ProjectSettings = props => {
   }
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth='md'>
       <div className={classes.root}>
-        <Typography variant="h2" className={classes.title}>
+        <Typography variant='h2' className={classes.title}>
           {title}
         </Typography>
         <TextField
-          id="provider"
-          label="Provider"
-          variant="outlined"
-          color="secondary"
+          id='provider'
+          label='Provider'
+          variant='outlined'
+          color='secondary'
           defaultValue={provider} />
         <TextField
-          id="techno"
-          label="Techno"
-          variant="outlined"
-          color="secondary"
+          id='techno'
+          label='Techno'
+          variant='outlined'
+          color='secondary'
           defaultValue={techno} />
         <TextField
-          id="propType"
-          label="PropType"
-          variant="outlined"
-          color="secondary"
+          id='propType'
+          label='PropType'
+          variant='outlined'
+          color='secondary'
           defaultValue={propType} />
         <TextField
-          id="description"
-          label="Description"
+          id='description'
+          label='Description'
           multiline
-          rows="25"
+          rows='25'
           defaultValue={description}
-          variant="outlined"
+          variant='outlined'
           fullWidth />
 
         <div className='padded'>
-          <Typography variant="h4" className={classes.title}>Props</Typography>
+          <Typography variant='h4' className={classes.title}>Props</Typography>
           {getComponentProps()}
         </div>
       </div>

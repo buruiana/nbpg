@@ -74,14 +74,14 @@ const CustomForm = () => {
     }
     dispatch(setCustomForms(newForms))
 
-    dispatch(generateCode({ 
+    dispatch(generateCode({
       currentProject: { ...currentProject, customForms: newForms }
     }))
   }
 
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth='md'>
       <Form
         schema={schema}
         onSubmit={onSubmit}
@@ -90,9 +90,9 @@ const CustomForm = () => {
       >
         <div className='padd_top_bott'>
           <Button
-            variant="contained"
-            color="primary"
-            type="submit"
+            variant='contained'
+            color='primary'
+            type='submit'
           >
             Submit
           </Button>

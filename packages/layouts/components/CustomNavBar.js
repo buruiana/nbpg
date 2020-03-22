@@ -1,6 +1,6 @@
-import Button from "@material-ui/core/Button"
-import Toolbar from "@material-ui/core/Toolbar"
-import React from "react"
+import Button from '@material-ui/core/Button'
+import Toolbar from '@material-ui/core/Toolbar'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -40,7 +40,7 @@ const CustomNavBar = () => {
         return (
           form.formIsActive && (
             <Button
-              color="inherit"
+              color='inherit'
               onClick={() => openModalForm(form.formName)}
               key={form.formName}
               name={form.formName}

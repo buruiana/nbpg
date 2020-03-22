@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import {
   projectSelectors,
   addModal,
@@ -9,17 +9,17 @@ import {
   setProjectTree,
 } from '@bpgen/services'
 import { useDispatch, useSelector } from 'react-redux'
-import SortableTree, {removeNodeAtPath } from "react-sortable-tree"
+import SortableTree, {removeNodeAtPath } from 'react-sortable-tree'
 import InfoIcon from '@material-ui/icons/Info'
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
 import StorageIcon from '@material-ui/icons/Storage'
-import "react-sortable-tree/style.css"
+import 'react-sortable-tree/style.css'
 
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
 
-const externalNodeType = "yourNodeType"
+const externalNodeType = 'yourNodeType'
 const shouldCopyOnOutsideDrop = true
 const getNodeKey = ({ treeIndex }) => treeIndex
 
@@ -68,7 +68,7 @@ const SortTree = () => {
         dispatch(setProjectTree(treeData))
         dispatch(generateCode({ currentProject }))
       } else {
-        dispatch(setError("Tree length should be 1"))
+        dispatch(setError('Tree length should be 1'))
       }
     } catch (error) {
       dispatch(setError(error))
@@ -100,7 +100,7 @@ const SortTree = () => {
       >
         <SortableTree
           treeData={filteredDefaultTree()}
-          onChange={() => console.log("changed")}
+          onChange={() => console.log('changed')}
           dndType={externalNodeType}
           shouldCopyOnOutsideDrop={shouldCopyOnOutsideDrop}
           generateNodeProps={({ node, path }) => ({

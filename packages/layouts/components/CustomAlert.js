@@ -1,5 +1,5 @@
 import Alert from '@material-ui/lab/Alert'
-import React from "react"
+import React from 'react'
 import { projectSelectors, resetAlert } from '@bpgen/services'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,7 +9,6 @@ const CustomAlert = () => {
   const info = useSelector(projectSelectors.infoSelector)
 
   const onClose = () => dispatch(resetAlert())
-
   setTimeout(() => onClose(), 5000)
 
   if (!error && !info) return null

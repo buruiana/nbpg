@@ -1,9 +1,9 @@
-import React from "react"
-import AceEditor from "react-ace"
-import "brace/mode/jsx"
-import "brace/theme/github"
-import isEmpty from "lodash/isEmpty"
-import get from "lodash/get"
+import React from 'react'
+import AceEditor from 'react-ace'
+import 'brace/mode/jsx'
+import 'brace/theme/github'
+import isEmpty from 'lodash/isEmpty'
+import get from 'lodash/get'
 import { useSelector } from 'react-redux'
 import {
   codeGenSelectors,
@@ -16,21 +16,21 @@ const Ace = () => {
   const currentTab = useSelector(projectSelectors.currentTabSelector) || ''
 
   const getAceContent = () => {
-    if (isEmpty(code)) return ""
+    if (isEmpty(code)) return ''
     return get(code.filter(e => e.id === currentTab), '[0].code', '')
   }
 
   return (
     <div>
-      <div className="paddingTop">
+      <div className='paddingTop'>
         <div>
           <AceTabs />
         </div>
 
         <AceEditor
-          mode="jsx"
-          theme="github"
-          name="ace-editor"
+          mode='jsx'
+          theme='github'
+          name='ace-editor'
           editorProps={{ $blockScrolling: true }}
           setOptions={{
             showLineNumbers: true,

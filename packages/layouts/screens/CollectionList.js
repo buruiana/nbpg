@@ -62,7 +62,7 @@ const CollectionList = ({ navigate }) => {
                 <AddCircleOutlineIcon
                   onClick={addNew}
                   color='primary'
-                  fontSize="large"
+                  fontSize='large'
                   className='generic_link'
                 />
               </div>
@@ -75,27 +75,27 @@ const CollectionList = ({ navigate }) => {
           </Grid>
         </div>
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+          <Table className={classes.table} aria-label='simple table'>
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>Description</TableCell>
-                <TableCell align="right">Actions</TableCell>
+                <TableCell align='right'>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {filteredCollections().map(row => (
                 <TableRow key={row._id}>
-                  <TableCell component="th" scope="row">
+                  <TableCell component='th' scope='row'>
                     <Link
                       onClick={() => navigate(`/form/${row._id}`)}
-                      href="#"
+                      href='#'
                     >
                       {row.title}
                     </Link>
                   </TableCell>
                   <TableCell>{row.description}</TableCell>
-                  <TableCell align="right">
+                  <TableCell align='right'>
                     <DeleteRounded
                       onClick={() => deleteCollection(row._id)}
                       color='primary'

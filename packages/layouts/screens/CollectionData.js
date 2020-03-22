@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -110,7 +110,7 @@ const CollectionData = props => {
           </Button>
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="h6">
+          <Typography variant='h6'>
             {get(selectedCollection, 'title', '').toUpperCase()} DATA
           </Typography>
         </Grid>
@@ -120,7 +120,7 @@ const CollectionData = props => {
             <AddCircleOutlineIcon
               onClick={addNew}
               color='primary'
-              fontSize="large"
+              fontSize='large'
               className='generic_link'
             />
           </Grid>
@@ -132,18 +132,18 @@ const CollectionData = props => {
               <Search searchFields={selectedCollection.searchFields}/>
             </div>
             <TableContainer component={Paper}>
-              <Table className='table' aria-label="simple table">
+              <Table className='table' aria-label='simple table'>
                 <TableHead>
                   <TableRow>
                     <TableCell>Name</TableCell>
-                    <TableCell align="right">Actions</TableCell>
+                    <TableCell align='right'>Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {filteredData().map(row => (
                     <TableRow key={row.id}>
                       <TableCell>{row.title}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align='right'>
                         <DeleteRounded
                           onClick={() => deleteCollectionData(row.id)}
                           color='primary'

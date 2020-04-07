@@ -1,12 +1,13 @@
 import {
   backendServiceReducer,
-  collectionServiceReducer,
-  modalServiceReducer,
-  searchServiceReducer,
-  projectServiceReducer,
   codeGenServiceReducer,
-} from '@bpgen/services'
-import { combineReducers } from 'redux'
+  collectionServiceReducer,
+  loginServiceReducer,
+  modalServiceReducer,
+  projectServiceReducer,
+  searchServiceReducer,
+} from "@bpgen/services";
+import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   backendServiceReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   searchServiceReducer,
   projectServiceReducer,
   codeGenServiceReducer,
-})
+  loginServiceReducer,
+});
 
-export default rootReducer
+export default rootReducer;

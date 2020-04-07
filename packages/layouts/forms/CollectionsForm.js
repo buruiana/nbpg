@@ -1,65 +1,67 @@
 import {
+  collectionSelectors,
   createItem,
-  updateItem,
   getCollections,
-  collectionSelectors
-} from '@bpgen/services'
-import React from 'react'
-import { withTheme } from 'react-jsonschema-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { Theme as MuiTheme } from 'rjsf-material-ui'
-import Button from '@material-ui/core/Button'
+  updateItem,
+} from "@bpgen/services";
+import Button from "@material-ui/core/Button";
+import React from "react";
+import { withTheme } from "react-jsonschema-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Theme as MuiTheme } from "rjsf-material-ui";
+import { useAuth } from "../hooks/useAuth";
 
-const CollectionsForm = props => {
-  const { navigate, id } = props
-  const collections = useSelector(collectionSelectors.collectionSelector) || []
-  const selected = collections.filter(e => e._id === id)[0] || []
+const CollectionsForm = (props) => {
+  const { navigate, id } = props;
+  useAuth(navigate);
+  const collections = useSelector(collectionSelectors.collectionSelector) || [];
+  const selected = collections.filter((e) => e._id === id)[0] || [];
 
-  const Form = withTheme(MuiTheme)
-  const dispatch = useDispatch()
+  const Form = withTheme(MuiTheme);
+  const dispatch = useDispatch();
   const schema = {
-    type: 'object',
+    type: "object",
     properties: {
-      _id: { type: 'string', title: 'Id' },
-      title: { type: 'string', title: 'Name' },
-      description: { type: 'string', title: 'Description' },
-      searchFields: { type: 'string', title: 'searchFields' },
-      jfSchema: { type: 'string', title: 'Schema' },
-      jfUiSchema: { type: 'string', title: 'UISchema' },
-    }
-  }
+      _id: { type: "string", title: "Id" },
+      title: { type: "string", title: "Name" },
+      description: { type: "string", title: "Description" },
+      searchFields: { type: "string", title: "searchFields" },
+      jfSchema: { type: "string", title: "Schema" },
+      jfUiSchema: { type: "string", title: "UISchema" },
+    },
+  };
 
   const uiSchema = {
-    _id: { 'ui:widget': 'hidden' },
+    _id: { "ui:widget": "hidden" },
     jfSchema: {
-      'ui:widget': 'textarea',
-      'ui:options': {
-        rows: 15
-      }
+      "ui:widget": "textarea",
+      "ui:options": {
+        rows: 15,
+      },
     },
     jfUiSchema: {
-      'ui:widget': 'textarea',
-      'ui:options': {
-        rows: 15
-      }
-    }
-  }
+      "ui:widget": "textarea",
+      "ui:options": {
+        rows: 15,
+      },
+    },
+  };
 
   const onSubmit = ({ formData }) => {
     formData._id
-      ? dispatch(updateItem({ type: 'collections', data: formData }))
-      : dispatch(createItem({ type: 'collections', data: formData }))
-    dispatch(getCollections())
-    navigate('/list')
-  }
-  const onChange = () => undefined
+      ? dispatch(updateItem({ type: "collections", data: formData }))
+      : dispatch(createItem({ type: "collections", data: formData }));
+    dispatch(getCollections());
+    navigate("/list");
+  };
+  const onChange = () => undefined;
 
   return (
     <div>
       <Button
         onClick={() => navigate(`/list`)}
-        component='button'
-        color='secondary'
+        component="button"
+        color="secondary"
       >
         Back
       </Button>
@@ -70,18 +72,14 @@ const CollectionsForm = props => {
         formData={selected}
         uiSchema={uiSchema}
       >
-        <div className='padd_top_bott'>
-          <Button
-            variant='contained'
-            color='primary'
-            type='submit'
-          >
+        <div className="padd_top_bott">
+          <Button variant="contained" color="primary" type="submit">
             Submit
-        </Button>
+          </Button>
         </div>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default CollectionsForm
+export default CollectionsForm;

@@ -8,7 +8,6 @@ const loginService = createSlice({
   },
   reducers: {
     signin: (state, action) => {
-      console.log("########## action", action);
       if (
         (action.payload.username === "admin") &
         (action.payload.password === "xxx")
